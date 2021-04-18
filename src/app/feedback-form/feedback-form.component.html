@@ -23,4 +23,6 @@
     </div>
     <button style="margin: auto;" class="btn btn-primary">Отослать</button>
     <!--</ngx-recaptcha2>-->
+    <div class="preloader" [ngClass]="{'active': preloadFlag}"><div class="icon" ></div></div>
+    <div class="message" [ngClass]="{'active': messageFlag}">{{message}}</div>
 </form>
