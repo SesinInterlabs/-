@@ -70,9 +70,7 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   private hideMessage(){
-    console.log(this.messageFlag);
     if(this.messageFlag === true){
-      
       this.messageFlag = false;
       this.message = '';
     }
