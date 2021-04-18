@@ -1,36 +1,36 @@
 <?php
 $logs = file_get_contents('access.log');
 
-$ipAccessReg = '/[\d]+[\.][\d]+[\.][\d]+[\.][\d]+.[\-].[\-]./';
-$ipAccessRegSec = '/[\d]+[\.][\d]+[\.][\d]+[\.][\d]+/';
-preg_match_all($ipAccessReg, $logs, $ipAccessData);
-$ipAccessData = implode(' ', $ipAccessData[0]);
-preg_match_all($ipAccessRegSec, $ipAccessData, $ipAccessDataSec);
-
-$dateAccessReg = '/[\[].*[\]]/';
-preg_match_all($dateAccessReg, $logs, $dateAccessData);
-
-$requestAccessReg = '/["].*["]/';
-preg_match_all($requestAccessReg, $logs, $requestAccessData);
-
-$requestTypeAccessReg = '/(GET)|(POST)|(PUT)|(DELETE)/';
-preg_match_all($requestTypeAccessReg, $logs, $requestTypeAccessData);
-
-$requestUrlAccessReg = '/[h][t][t][p][s]?.*[H][T][T][P][S]?[\/][\d]+[\.]?[\d]?/';
-preg_match_all($requestUrlAccessReg, $logs, $requestUrlAccessData);
-
-$requestBrowserReg = '/[\"][(Mozilla)|(Opera)|(Chrome)|(Safari)].+[\"]/';
-preg_match_all($requestBrowserReg, $logs, $requestBrowserData);
+$reportExp = '/^[\d].*[\"]/m';
+preg_match_all($reportExp, $logs, $reports);
 
 $report_item_arr = [];
-for($i=0;$i<count($ipAccessDataSec[0]);$i++)
+for($i=0;$i<count($reports[0]);$i++)
 {
+	$ipAccessReg = '/^[\d]+[\.][\d]+[\.][\d]+[\.][\d]+/';
+	preg_match_all($ipAccessReg, $reports[0][$i], $ipAccessData);
+
+	$dateAccessReg = '/[\[].*[\]]/';
+	preg_match_all($dateAccessReg, $reports[0][$i], $dateAccessData);
+
+	$requestAccessReg = '/["].*["]/';
+	preg_match_all($requestAccessReg, $reports[0][$i], $requestAccessData);
+
+	$requestTypeAccessReg = '/(GET)|(POST)|(PUT)|(DELETE)/';
+	preg_match_all($requestTypeAccessReg, $reports[0][$i], $requestTypeAccessData);
+
+	$requestUrlAccessReg = '/[h][t][t][p][s]?.*[H][T][T][P][S]?[\/][\d]+[\.]?[\d]?/';
+	preg_match_all($requestUrlAccessReg, $reports[0][$i], $requestUrlAccessData);
+
+	$requestBrowserReg = '/[\"][(Mozilla)|(Opera)|(Chrome)|(Safari)].+[\"]/';
+	preg_match_all($requestBrowserReg, $reports[0][$i], $requestBrowserData);
+		
 	$report_item_arr[$i] = [
-		'ip' => $ipAccessDataSec[0][$i],
-		'date' => $dateAccessData[0][$i],
-		'requestType' => $requestTypeAccessData[0][$i],
-		'requestUrl' => $requestUrlAccessData[0][$i],
-		'requestBrowser' => $requestBrowserData[0][$i]
+		'ip' => $ipAccessData[0][0],
+		'date' => $dateAccessData[0][0],
+		'requestType' => $requestTypeAccessData[0][0],
+		'requestUrl' => $requestUrlAccessData[0][0],
+		'requestBrowser' => $requestBrowserData[0][0]
 	];
 }
 
