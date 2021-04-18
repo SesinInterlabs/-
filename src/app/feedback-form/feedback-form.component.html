@@ -1,0 +1,26 @@
+<form class="form" [formGroup]="formFeedback" (ngSubmit)="onSubmit()">
+    <!--<ngx-recaptcha2 [siteKey]="siteKey">-->
+    <div class="display">Форма обратной связи</div>
+    <div class="form-group">
+        <label class="label" for="name">ФИО: </label>
+        <input id="name" type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid':formFeedback.get('name').invalid && formFeedback.get('name').touched, 'is-valid':formFeedback.get('name').valid}">
+        <div class="feedback invalid-feedback">Укажите верное ФИО.</div>
+    </div>
+    <div class="form-group">
+        <label class="label" for="name">Email: </label>
+        <input id="email" type="text" class="form-control" formControlName="email" [ngClass]="{'is-invalid':formFeedback.get('email').invalid && formFeedback.get('email').touched, 'is-valid':formFeedback.get('email').valid}">
+        <div class="feedback invalid-feedback">Укажите верный email.</div>
+    </div>
+    <div class="form-group">
+        <label class="label" for="name">Телефон: </label>
+        <input id="phone" prefix="+7" mask="(000)000-00-00" [showMaskTyped]="true" type="text" class="form-control" formControlName="phone" [ngClass]="{'is-invalid':formFeedback.get('phone').invalid && formFeedback.get('phone').touched, 'is-valid':formFeedback.get('phone').valid}">
+        <div class="feedback invalid-feedback">Укажите верный телефон.</div>
+    </div>
+    <div class="form-group">
+        <label class="label" for="name">Сообщение: </label>
+        <textarea id="text" col="30" row="10" class="form-control" formControlName="text" [ngClass]="{'is-invalid':formFeedback.get('text').invalid && formFeedback.get('text').touched, 'is-valid':formFeedback.get('text').valid}"></textarea>
+        <div class="feedback invalid-feedback">Заполните поле сообщения.</div>
+    </div>
+    <button style="margin: auto;" class="btn btn-primary">Отослать</button>
+    <!--</ngx-recaptcha2>-->
+</form>

@@ -1,0 +1,19 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/img/fon-32.png');
+    background-size: cover;
+    background-color: rgb(195, 207, 228); 
+    width:100%;
+    height:100vh;
+}
+
+.text-bold{
+    font-weight: bold;
+}
